@@ -56,6 +56,13 @@ func (s *Server) mustTX(key string) *Transaction {
 
 // ListenUDPServer ListenUDPServer
 func (s *Server) ListenUDPServer(addr string) {
+	defer func() {
+		if e := recover(); e != nil {
+			fmt.Println("recover_panic")
+			fmt.Println(e)
+		}
+	}()
+
 	udpaddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		logrus.Fatal("net.ResolveUDPAddr err", err, addr)
