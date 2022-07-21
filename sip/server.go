@@ -102,6 +102,12 @@ func (s *Server) RegistHandler(method RequestMethod, handler RequestHandler) {
 	s.hmu.Unlock()
 }
 func (s *Server) handlerListen(msgs chan Message) {
+	defer func() {
+		if e := recover(); e != nil {
+			fmt.Println("recover_panic")
+			fmt.Println(e)
+		}
+	}()
 	var msg Message
 	for {
 		msg = <-msgs
