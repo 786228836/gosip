@@ -572,6 +572,12 @@ func (p *parser) stop() {
 }
 
 func (p *parser) start() {
+	defer func() {
+		if e := recover(); e != nil {
+			fmt.Println("recover_panic")
+			fmt.Println(e)
+		}
+	}()
 	var termErr error
 	var msg Message
 	var packet Packet
