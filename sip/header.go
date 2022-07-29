@@ -1023,7 +1023,7 @@ func (from *FromHeader) String() string {
 
 	buffer.WriteString(fmt.Sprintf("<%s>", from.Address))
 
-	if from.Params.Length() > 0 {
+	if nil != from.Params && from.Params.Length() > 0 {
 		buffer.WriteString(";")
 		buffer.WriteString(from.Params.ToString(';'))
 	}
